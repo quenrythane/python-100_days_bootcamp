@@ -8,7 +8,7 @@ def shuffle(deck_name):
 
 def new_shuffled_deck():
     play_deck = deck.copy()
-    shuffle(play_deck)
+    random.shuffle(play_deck)
     return play_deck
 
 def deal_card():
