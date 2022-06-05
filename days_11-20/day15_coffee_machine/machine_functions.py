@@ -1,7 +1,5 @@
 from data import *
 
-global money
-money = money
 
 def report():
     for k, v in resources.items():
