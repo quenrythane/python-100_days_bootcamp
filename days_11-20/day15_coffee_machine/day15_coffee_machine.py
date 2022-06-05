@@ -1,8 +1,5 @@
-from data import *
 from machine_functions import *
 
-money = 10
-print(money)
 
 # init
 want_order = "y"
@@ -37,7 +34,8 @@ while want_order != "n":
                 resources["water"] -= MENU[order]["ingredients"]["water"]
                 resources["milk"] -= MENU[order]["ingredients"]["milk"]
                 resources["coffee"] -= MENU[order]["ingredients"]["coffee"]
-                money += MENU[order]["cost"]
+                add_money(MENU[order]["cost"])
+
 
                 print(f"Here is your {order}")
                 print(f"you paid ${amount} and cost was ${MENU[order]['cost']}.", end=" ")

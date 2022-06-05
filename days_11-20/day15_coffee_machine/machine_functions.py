@@ -1,5 +1,8 @@
 from data import *
 
+global money
+money = money
+
 def report():
     for k, v in resources.items():
         if k == "coffee":
@@ -28,3 +31,8 @@ def add_resources():
     resources["water"] += water
     resources["milk"] += milk
     resources["coffee"] += coffee
+
+
+def add_money(amount):
+    global money
+    money += amount
