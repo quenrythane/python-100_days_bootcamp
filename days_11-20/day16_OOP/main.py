@@ -26,10 +26,11 @@ while want_order != "n":
         print()
 
     elif order in MENU.get_items():
-        if CoffeeMaker.is_resource_sufficient(MENU.find_drink(order)):
-            print(f"{order} cost is ${MENU.find_drink(order).cost}.")
-            Money_Mach.make_payment(MENU.find_drink(order).cost)
-            CoffeeMaker.make_coffee(MENU.find_drink(order))
-            print()
+        drink = MENU.find_drink(order)
+        if CoffeeMaker.is_resource_sufficient(drink):
+            print(f"{order} cost is ${drink.cost}.")
+            if Money_Mach.make_payment(drink.cost):
+                CoffeeMaker.make_coffee(drink)
+                print()
 
 
