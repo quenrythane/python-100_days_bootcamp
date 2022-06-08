@@ -1,6 +1,5 @@
 from machine_functions import *
 
-
 # init
 want_order = "y"
 
