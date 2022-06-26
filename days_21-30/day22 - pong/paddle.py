@@ -7,23 +7,15 @@ class Paddle(Turtle):
         self.color("white")
         self.shape("square")
         self.shapesize(5, 1)
-
         self.penup()
-        self.x_pos = x_pos
-        self.y_pos = y_pos
         self.setposition(x_pos, y_pos)
 
+    # don't know which version is better so leave both (but personally prefer second because of readability)
     def go_up(self):
-        if self.y_pos > 230:
-            pass
-        else:
-            self.y_pos += 20
-            self.goto(self.x_pos, self.y_pos)
+        self.goto(self.xcor(), self.ycor() + 20) if self.position()[1] < 230 else "do nothing"
 
     def go_down(self):
-        if self.y_pos < -230:
+        if self.position()[1] < -230:
             pass
         else:
-            self.y_pos -= 20
-            self.goto(self.x_pos, self.y_pos)
-
+            self.goto(self.xcor(), self.ycor() - 20)
