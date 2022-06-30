@@ -8,10 +8,9 @@ screen = Screen()
 screen.setup(width=600, height=600)
 screen.tracer(0)
 
-player = Player()
-# TODO 2: add more randomly generated car along the y-axis which move from right edge to left and then dissapear
-car = CarManager()
 scoreboard = Scoreboard()
+player = Player()
+cars = CarManager()
 
 screen.listen()
 screen.onkeypress(player.move, "Up")
@@ -20,19 +19,21 @@ game_is_on = True
 while game_is_on:
     time.sleep(0.1)
     screen.update()
-    car.move()
+
+    cars.create_car()
+    cars.move_cars()
 
     # detect player win
-    if player.position()[1] > 260:
-        player.setposition(0, -280)
+    if player.position()[1] > player.finish:
+        player.go_to_start()
         scoreboard.level_up()
-        car.increase_speed()
+        cars.increase_speed()
 
     # detect turtle collision
-    # TODO 4: finish this detection
-    if player.position()[1] > 50:
-        game_is_on = False
-        scoreboard.game_over()
+    for car in cars.all_cars:
+        if player.distance(car) < 25:
+            game_is_on = False
+            scoreboard.game_over()
 
 
 screen.exitonclick()

@@ -10,7 +10,11 @@ class Player(Turtle):
         self.shape("turtle")
         self.penup()
         self.setheading(90)
-        self.setposition(0, -280)
+        self.go_to_start()
+        self.finish = FINISH_LINE_Y
 
     def move(self):
-        self.forward(10)
+        self.forward(MOVE_DISTANCE)
+
+    def go_to_start(self):
+        self.setposition(STARTING_POSITION)
