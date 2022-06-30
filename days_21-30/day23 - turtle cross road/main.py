@@ -31,10 +31,8 @@ while game_is_on:
 
     # detect turtle collision
     for car in cars.all_cars:
-        if player.distance(car) < 25:
+        if player.distance(car) < 21:
             game_is_on = False
             scoreboard.game_over()
 
-
 screen.exitonclick()
-
