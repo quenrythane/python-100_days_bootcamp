@@ -23,8 +23,8 @@ while len(correct_states) < len(all_states):
 
     if user_answer.lower() == "exit":
         states_to_learn_dict = {"states": [state for state in all_states if state not in correct_states]}
-        df_to_learn = pd.DataFrame(states_to_learn_dict)
-        df_to_learn.to_csv("states_to_learn.csv")
+        df_states_to_learn = pd.DataFrame(states_to_learn_dict)
+        df_states_to_learn.to_csv("states_to_learn.csv")
         break
 
     if user_answer in all_states and user_answer not in correct_states:
