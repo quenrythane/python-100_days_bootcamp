@@ -45,6 +45,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\days_21-30\day26 - list and dict comprehension\nato_phonetic_alphabet.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>
