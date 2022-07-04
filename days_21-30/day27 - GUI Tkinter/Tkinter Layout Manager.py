@@ -18,14 +18,12 @@ my_label.pack(side="left")
 # Button
 def button_clicked():
     print("I got clicked")
-    text = "Button Got Clicked"
+    text = input.get()
     my_label["text"] = text
 
 button = tk.Button(text="Click Me", command=button_clicked)
 button.pack(side="left")
 
 # Entry
-
-
-
-window.mainloop()
+input = tk.Entry(width=10)
+input.pack()
