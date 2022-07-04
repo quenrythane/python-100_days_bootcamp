@@ -1,5 +1,9 @@
 import pandas as pd
 
 data = pd.read_csv("nato_phonetic_alphabet.csv")
-data_dict = {v["letter"]: v["code"] for k, v in data.iterrows()}
-print(data_dict)
+code_dict = {row["letter"]: row["code"] for index, row in data.iterrows()}
+
+word = input("Enter a word: ")
+
+final_list = [code_dict[letter.upper()] for letter in word]
+print(final_list)
