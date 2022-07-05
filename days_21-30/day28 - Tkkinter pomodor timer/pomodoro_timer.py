@@ -1,5 +1,4 @@
 from tkinter import *
-from time import *
 # ---------------------------- CONSTANTS ------------------------------- #
 
 PINK = "#e2979c"
@@ -11,34 +10,46 @@ WORK_MIN = 25
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
 reps = 0
+timer = None
 
-# ---------------------------- TIMER RESET ------------------------------- # 
+
+# ---------------------------- TIMER RESET ------------------------------- #
+def reset_timer():
+    window.after_cancel(timer)
+    global reps
+    reps = 0
+    checks_label.config(text=checks*(reps//2))
+    canvas.itemconfig(timer_text, text="00:00")
+    timer_label.config(text="Timer", fg=GREEN)
+
 
 # ---------------------------- TIMER MECHANISM ------------------------------- #
 def start_timer():
     global reps
     reps += 1
+    checks_label.config(text=checks*(reps//2))
 
     if reps % 2 == 1:
         timer_label.config(text="Work", fg=GREEN)
         count_down(WORK_MIN * 60)
 
     elif reps % 8 == 0:
-        timer_label.config(text= "Break", fg=RED)
+        timer_label.config(text="Break", fg=RED)
         count_down(LONG_BREAK_MIN * 60)
+        reps = 0
 
     elif reps % 2 == 0:
-        timer_label.config(text= "Break", fg=PINK)
+        timer_label.config(text="Break", fg=PINK)
         count_down(SHORT_BREAK_MIN * 60)
-
 
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
 def count_down(count):
-    clock_text = "{:02}:{:02}".format(count//60, count%60)
+    clock_text = "{:02}:{:02}".format(count // 60, count % 60)
     canvas.itemconfig(timer_text, text=clock_text)
     if count > 0:
-        window.after(1000, count_down, count-1)
+        global timer
+        timer = window.after(1000, count_down, count-1)
     else:
         start_timer()
 
@@ -62,27 +73,16 @@ timer_label = Label(text="Timer", font=(FONT_NAME, 35, "bold"), bg=YELLOW, fg=GR
 timer_label.grid(column=1, row=0)
 
 # start button
-def start_clicked():
-    pass
-
 start_button = Button(text="Start", command=start_timer, highlightthickness=0)
 start_button.grid(column=0, row=2)
 
 # reset button
-def reset_clicked():
-    pass
-
-reset_button = Button(text="Reset", command=reset_clicked, highlightthickness=0)
+reset_button = Button(text="Reset", command=reset_timer, highlightthickness=0)
 reset_button.grid(column=2, row=2)
 
 # checks section
 checks = "✔"
-checks_label = Label(text=checks, fg=GREEN, bg=YELLOW)
+checks_label = Label(text="", fg=GREEN, bg=YELLOW)
 checks_label.grid(column=1, row=3)
-
-
-# .grid(column=0, row=3)
-# .grid(column=2, row=3)
-
 
 window.mainloop()
