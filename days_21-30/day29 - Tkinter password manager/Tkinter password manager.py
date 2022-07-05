@@ -13,7 +13,7 @@ window.config(padx=50, pady=20)
 canvas = Canvas(width=200, height=200)
 lock_img = PhotoImage(file="logo.png")
 canvas.create_image(100, 100, image=lock_img)
-canvas.grid(column=1, row=0)
+canvas.grid(column=0, row=0, columnspan=3, ipadx=0)
 
 # website section
 website_label = Label(text="Website:")
@@ -37,7 +37,7 @@ password = ""
 password_input = Entry(text=password, width=21)
 password_input.grid(column=1, row=3)
 
-generate_button = Button(text="Generate Password", width=15, command=print, padx=0)
+generate_button = Button(text="Generate Password", width=15)
 generate_button.grid(column=2, row=3)
 
 # add section
