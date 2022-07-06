@@ -45,6 +45,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\days_31-40\day 31\data\french_words.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>
