@@ -52,6 +52,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\days_21-30\day29 - Tkinter password manager\data_password.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>
