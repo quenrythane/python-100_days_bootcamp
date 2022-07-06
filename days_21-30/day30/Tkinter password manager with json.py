@@ -64,6 +64,28 @@ def save_password():
             password_input.delete(0, END)
 
 
+# ---------------------------- SEARCH PASSWORD ------------------------------- #
+def search_password():
+    website = website_input.get()
+    try:
+        with open("data_password.json", "r") as data_file:
+            data = json.load(data_file)
+    except FileNotFoundError:
+        msg.showinfo(title="Ooops", message="No data file found!")
+    else:
+        try:
+            username, password = data[website]["username"], data[website]["password"]
+        except KeyError:
+            msg.showinfo(title=website, message=f"No password found for {website}")
+        else:
+            msg.showinfo(title=website, message=f"Username: {username}\nPassword: {password}")
+            ppc.copy(username)
+            ppc.copy(password)
+
+        finally:
+            website_input.delete(0, END)
+            password_input.delete(0, END)
+
 # ---------------------------- UI SETUP ------------------------------- #
 
 window = Tk()
@@ -80,16 +102,19 @@ canvas.grid(column=0, row=0, columnspan=3, ipadx=0)
 website_label = Label(text="Website:")
 website_label.grid(column=0, row=1)
 
-website_input = Entry(width=40)
-website_input.grid(column=1, row=1, columnspan=2)
+website_input = Entry(width=30)
+website_input.grid(column=1, row=1)
 website_input.focus()
+
+search_button = Button(text="Search", width=15, command=search_password)
+search_button.grid(column=2, row=1)
 
 
 # username section
 username_label = Label(text="Email/Username:")
 username_label.grid(column=0, row=2)
 
-username_input = Entry(width=40)
+username_input = Entry(width=49)
 username_input.insert(0, base_username)
 username_input.grid(column=1, row=2, columnspan=2)
 
@@ -98,7 +123,7 @@ username_input.grid(column=1, row=2, columnspan=2)
 password_label = Label(text="Password:")
 password_label.grid(column=0, row=3)
 
-password_input = Entry(text="", width=21)
+password_input = Entry(text="", width=30)
 password_input.grid(column=1, row=3)
 
 generate_button = Button(text="Generate Password", width=15, command=generate_password)
