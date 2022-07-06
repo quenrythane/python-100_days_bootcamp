@@ -24,7 +24,7 @@ def generate_password():
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def save_password():
-    website, username, password = website_input.get(), username_input.get(), password_input.get()
+    website, username, password = website_input.get().strip(), username_input.get().strip(), password_input.get().strip()
 
     if len(website) == 0 or len(username) == 0 or len(password) == 0:
         msg.showinfo(title="Ooops", message="Please, don't leave any fields empty!")
