@@ -10,13 +10,6 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="\days_21-30\day25 - csv + pandas\Squirrel Census\squirel_count.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="\days_21-30\day25 - csv + pandas\pandas_csv\new_data.csv">
           <value>
             <Attribute>
@@ -32,13 +25,6 @@
           </value>
         </entry>
         <entry key="\days_21-30\day25 - csv + pandas\us-states-game-start\states_to_learn.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\days_21-30\day25 - csv + pandas\weather_data.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
