@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox as msg  # need to inport "submodule"
 
 base_username = "artur.babinski.g@gmail.com"
 
@@ -7,10 +8,22 @@ base_username = "artur.babinski.g@gmail.com"
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def save_password():
-    with open("data_password.csv", "a") as data:
-        log = f"{website_input.get()},{username_input.get()},{password_input.get()}\n"
-        data.write(log)
-        website_input.delete(0, END), password_input.delete(0, END)
+    website, username, password = website_input.get(), username_input.get(), password_input.get()
+
+    if len(website) == 0 or len(username) == 0 or len(password) == 0:
+        msg.showinfo(title="Ooops", message="Please, don't leave any fields empty!")
+        is_ok = False
+
+    else:
+        is_ok = msg.askokcancel(title=website_input.get(),
+                                message=f"There are the details entered for {website}: \n"
+                                        f"Username: {username}, \npassword: {password} \n\nIs it ok to save?")
+
+    if is_ok:
+        with open("data_password.csv", "a") as data:
+            log = f"{website},{username},{password}\n"
+            data.write(log)
+            website_input.delete(0, END), password_input.delete(0, END)
 
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -47,8 +60,7 @@ username_input.grid(column=1, row=2, columnspan=2)
 password_label = Label(text="Password:")
 password_label.grid(column=0, row=3)
 
-password = ""
-password_input = Entry(text=password, width=21)
+password_input = Entry(text="", width=21)
 password_input.grid(column=1, row=3)
 
 generate_button = Button(text="Generate Password", width=15)
