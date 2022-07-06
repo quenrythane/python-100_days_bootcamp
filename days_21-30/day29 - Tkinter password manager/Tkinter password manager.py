@@ -1,10 +1,25 @@
+import pyperclip as ppc
+from random import *
+from string import *
 from tkinter import *
 from tkinter import messagebox as msg  # need to inport "submodule"
 
 base_username = "artur.babinski.g@gmail.com"
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
+def generate_password():
+    password_input.delete(0, END)
 
+    password_letters = [choice(ascii_letters) for _ in range(randint(16, 24))]
+    password_numbers = [choice(digits) for _ in range(randint(8, 12))]
+    password_symbols = [choice(punctuation) for _ in range(randint(8, 12))]
+
+    password_list = password_letters + password_symbols + password_numbers
+    shuffle(password_list)
+
+    password = "".join(password_list)
+    password_input.insert(0, password)
+    ppc.copy(password)  # automatically copy to generated password to clipboard
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def save_password():
@@ -16,7 +31,7 @@ def save_password():
 
     else:
         is_ok = msg.askokcancel(title=website_input.get(),
-                                message=f"There are the details entered for {website}: \n"
+                                message=f"There are the details entered for page: {website}: \n"
                                         f"Username: {username}, \npassword: {password} \n\nIs it ok to save?")
 
     if is_ok:
@@ -63,7 +78,7 @@ password_label.grid(column=0, row=3)
 password_input = Entry(text="", width=21)
 password_input.grid(column=1, row=3)
 
-generate_button = Button(text="Generate Password", width=15)
+generate_button = Button(text="Generate Password", width=15, command=generate_password)
 generate_button.grid(column=2, row=3)
 
 
