@@ -45,6 +45,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\days_31-40\day 31 - flash card app\data\french_words_to_learn.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\days_31-40\day 31\data\french_words.csv">
           <value>
             <Attribute>

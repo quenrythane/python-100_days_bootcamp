@@ -6,11 +6,17 @@ import random
 BACKGROUND_COLOR = "#B1DDC6"
 FONT_1 = ("Arial", 48, "italic")
 FONT_2 = ("Arial", 60, "bold")
+curren_word = ""
 
 # read csv
-data_dict = pd.read_csv("data/french_words.csv").to_dict()  # French: {int: "word"}
+try:
+    data_dict = pd.read_csv("data/french_words_to_learn.csv").to_dict()
+except FileNotFoundError:
+    data_dict = pd.read_csv("data/french_words.csv").to_dict()  # French: {int: "word"}
+
 # french_word: english_word
 data_dict = {data_dict["French"][index]: data_dict["English"][index] for index in range(len(data_dict["French"]))}
+
 
 def flip_card(random_french_word):
     flashcard.itemconfig(card_language, text="English", fill="white")
@@ -19,13 +25,22 @@ def flip_card(random_french_word):
 
 
 def next_card():
-    global flip_timer
+    global flip_timer, curren_word
     window.after_cancel(flip_timer)
-    random_french_word = random.choice(list(data_dict.keys()))
+    curren_word = random.choice(list(data_dict.keys()))
     flashcard.itemconfig(card_image, image=image_front)
     flashcard.itemconfig(card_language, text="French", fill="black")
-    flashcard.itemconfig(card_word, text=random_french_word, fill="black")
-    flip_timer = window.after(3000, flip_card, random_french_word)
+    flashcard.itemconfig(card_word, text=curren_word, fill="black")
+    flip_timer = window.after(3000, flip_card, curren_word)
+
+
+def is_known():
+    del data_dict[curren_word]
+    next_card()
+    new_data = {"French": {index: word for index, word in enumerate(data_dict.keys())},
+                "English": {index: word for index, word in enumerate(data_dict.values())}}
+    pd.DataFrame(new_data).to_csv("data/french_words_to_learn.csv", index=False)
+
 
 
 # UI
@@ -54,7 +69,7 @@ wrong_button.config(highlightthickness=0, bg=BACKGROUND_COLOR)
 wrong_button.grid(column=0, row=1)
 
 correct_img = PhotoImage(file="images/right.png")
-correct_button = Button(image=correct_img, command=next_card)
+correct_button = Button(image=correct_img, command=is_known)
 correct_button.config(highlightthickness=0, bg=BACKGROUND_COLOR)
 correct_button.grid(column=1, row=1)
 
