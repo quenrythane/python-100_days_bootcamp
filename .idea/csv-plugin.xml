@@ -59,6 +59,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\days_31-40\day 32 - Automated Birthday Email\birthdat_wihser_sender\birthdays.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>
