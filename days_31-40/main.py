@@ -1,17 +1,9 @@
-import pandas as pd
-
-
-data = pd.read_csv("day 31 - flash card app/data/french_words.csv")
-print(data)
-data = data.to_dict()
-print(data)
-
-data_dict = {
-    "f1": "e1",
-    "f2": "e2",
-    "f3": "e3",
+dict = {
+    (1, 2, 3): "a",
+    (4, 5, 6): "b",
+    (7, 8, 9): "c",
 }
 
-final = {"French": {index: word for index, word in enumerate(data_dict.keys())},
-         "English": {index: word for index, word in enumerate(data_dict.values())}}
-print(final)
+
+for i in dict:
+    print(i[:2])
