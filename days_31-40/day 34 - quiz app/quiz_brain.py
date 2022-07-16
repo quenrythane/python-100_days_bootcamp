@@ -1,6 +1,6 @@
 import html
 
-
+# https://opentdb.com/api_config.php
 class QuizBrain:
 
     def __init__(self, q_list):
