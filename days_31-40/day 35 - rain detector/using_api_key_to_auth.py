@@ -16,6 +16,7 @@ weather_params = {
 
 current_endpoint = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}"
 one_call_endpoint = f"https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={api_key}"
+# https://openweathermap.org/api/one-call-api
 # one_call_endpoint_3 = f"https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid={api_key}"  # I have access to 3.0 API
 
 response = req.get(one_call_endpoint)
