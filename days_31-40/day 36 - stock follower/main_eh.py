@@ -1,5 +1,5 @@
 import requests as req
-import json
+from twilio.rest import Client
 
 
 ## STEP 1: Use https://www.alphavantage.co
@@ -8,7 +8,7 @@ COMPANY_NAME = "Tesla Inc"
 STOCK_API_KEY = "TRA7J4P5E8UCUOR"
 
 STOCK_ENDPOINT = "https://www.alphavantage.co/query"
-stock_parameters ={
+stock_parameters = {
     "function": "TIME_SERIES_DAILY",
     "symbol": STOCK_NAME,
     "apikey": STOCK_API_KEY,
@@ -39,6 +39,7 @@ news_parameters = {
 }
 news = req.get(NEWS_ENDPOINT, params=news_parameters).json()
 
+
 def count_change():
     change = yesterday_price - day_before_yesterday_price
     if change > 0:
@@ -47,8 +48,8 @@ def count_change():
         change_message = f"🔻{change_in_percent:.2f}%"
     return change_message
 
-def prepare_message(article):
 
+def prepare_message():
     message = f"{STOCK_NAME}: {count_change()}\n"  \
               f"{article['title']}\n" \
               f"{article['url']}"
@@ -57,14 +58,12 @@ def prepare_message(article):
 
 message_articles = []
 for article in news["articles"][:3]:
-    message_articles.append(prepare_message(article))
+    message_articles.append(prepare_message())
 
 
 ## STEP 3: Use https://www.twilio.com
 # Send a seperate message with the percentage change and each article's title and url to your phone number.
-
-from twilio.rest import Client
-
+# https://www.twilio.com/
 with open("twilio_auth.txt", "r") as file:
     account_sid, auth_token, twilio_number, my_number = file.read().splitlines()
     print(account_sid)
@@ -72,17 +71,18 @@ with open("twilio_auth.txt", "r") as file:
 
 client = Client(account_sid, auth_token)
 
-message = client.messages \
-                .create(
-                     body="Join Earth's mightiest heroes. Like Kevin Bacon.",
+message = client.messages.create(
+                     body=message_articles[0],
                      from_=twilio_number,
                      to=my_number
                  )
 
+print(message_articles[0])
 print(message.sid)
 print(message.status)
 
 
+#Optional: Format the SMS message like this:
 """
 TSLA: 🔺2%
 Headline: Were Hedge Funds Right About Piling Into Tesla Inc. (TSLA)?. 
@@ -92,5 +92,3 @@ or
 Headline: Were Hedge Funds Right About Piling Into Tesla Inc. (TSLA)?. 
 Brief: We at Insider Monkey have gone over 821 13F filings that hedge funds and prominent investors are required to file by the SEC The 13F filings show the funds' and investors' portfolio positions as of March 31st, near the height of the coronavirus market crash.
 """
-#Optional: Format the SMS message like this:
-
