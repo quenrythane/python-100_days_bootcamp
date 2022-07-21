@@ -1,7 +1,3 @@
-l = ["a", "b", "c", "d", "e", "f"]
+x = 1.123
 
-print(l[::-1])
-print(l[1::-1])
-print(l[2::-1])
-print(l[-2::-1])
-print(l[-2::-2])
+print(f"{x:.0f}")
