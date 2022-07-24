@@ -1,3 +1,8 @@
-x = 1.123
+from datetime import datetime
 
-print(f"{x:.0f}")
+today = datetime.now()
+a = str(today)[:10].replace("-", "")
+b = today.strftime("%Y%m%d")
+
+print(a)
+print(b)

@@ -1,4 +1,5 @@
 import requests as req
+from datetime import datetime
 
 # my account: https://pixe.la/@quenry-thane
 USERNAME = "quenry-thane"
@@ -46,8 +47,11 @@ print(link_to_graph, '\n')
 """
 
 # POST VALUE to the graph
+today = datetime.now()
+input_date = today.strftime("%Y%m%d")
+
 pixel_params = {
-    "date": "20220722",
+    "date": input_date,
     "quantity": "120",
 }
 
