@@ -62,16 +62,26 @@ resposne = req.post(url=f"{graph1_endpoint}/{GRAPH_ID}", json=pixel_params, head
 print(resposne.text)  # check for the response (and hipotetical errors/failures)
 print(f"{graph1_endpoint}/{GRAPH_ID}.html", '\n')
 
-get_endpoint = f"{graph1_endpoint}/{GRAPH_ID}/pixels"
-pixels_params ={
-
-}
-
-resposne = req.get(url=get_endpoint, params=pixels_params, headers=request_header)
-print(resposne.text)  # check for the response (and hipotetical errors/failures)
-
+# GET WEEKLY VALUES
 def week_interval(date: tuple):
     today = datetime(date[0], date[1], date[2])
     start_week = datetime(today.year, today.month, today.day - (today.isoweekday() - 1))
     end_week = start_week + timedelta(days=6)
     return start_week.strftime("%Y%m%d"), end_week.strftime("%Y%m%d")
+
+from_period, to_period = week_interval(date=(2022, 7, 24))
+get_endpoint = f"{graph1_endpoint}/{GRAPH_ID}/pixels"
+pixels_params ={
+    "from": from_period,
+    "to": to_period,
+    "withBody": "true",
+}
+
+resposne = req.get(url=get_endpoint, params=pixels_params, headers=request_header)
+# print(resposne.text)  # check for the response (and hipotetical errors/failures)
+
+pixels_sum = sum(int(pixel["quantity"]) for pixel in resposne.json()["pixels"])
+print(f"You have spent {pixels_sum} minutes on programming this week ({from_period}-{to_period}).")
+
+
+
