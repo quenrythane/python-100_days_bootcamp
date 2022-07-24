@@ -1,5 +1,5 @@
 import requests as req
-from datetime import datetime
+from datetime import datetime, timedelta
 
 # my account: https://pixe.la/@quenry-thane
 USERNAME = "quenry-thane"
@@ -49,11 +49,29 @@ print(link_to_graph, '\n')
 # POST VALUE to the graph
 today = datetime.now()
 input_date = today.strftime("%Y%m%d")
+# input_date = "20220722"
 
+# quantity_input = input("What number of minutes did you spend on programming today?: ")
+quantity_input = str(20)
 pixel_params = {
     "date": input_date,
-    "quantity": "120",
+    "quantity": quantity_input,
 }
 
 resposne = req.post(url=f"{graph1_endpoint}/{GRAPH_ID}", json=pixel_params, headers=request_header)
-print(resposne.text, '\n')  # check for the response (and hipotetical errors/failures)
+print(resposne.text)  # check for the response (and hipotetical errors/failures)
+print(f"{graph1_endpoint}/{GRAPH_ID}.html", '\n')
+
+get_endpoint = f"{graph1_endpoint}/{GRAPH_ID}/pixels"
+pixels_params ={
+
+}
+
+resposne = req.get(url=get_endpoint, params=pixels_params, headers=request_header)
+print(resposne.text)  # check for the response (and hipotetical errors/failures)
+
+def week_interval(date: tuple):
+    today = datetime(date[0], date[1], date[2])
+    start_week = datetime(today.year, today.month, today.day - (today.isoweekday() - 1))
+    end_week = start_week + timedelta(days=6)
+    return start_week.strftime("%Y%m%d"), end_week.strftime("%Y%m%d")
