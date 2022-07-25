@@ -7,7 +7,7 @@ WEIGHT_KG = 70
 HEIGHT_CM = 180
 AGE = 25
 with open("access_data_3.txt", "r") as file:
-    APP_ID, API_KEY, username, project_name, sheet_name = file.read().split()
+    APP_ID, API_KEY, username, project_name, sheet_name, bearer_headers = file.read().split()
 
 ## NUTRI
 # nutri_food_endpoint = "https://trackapi.nutritionix.com/v2/natural/nutrients"
@@ -47,6 +47,5 @@ for activity in nutri_response["exercises"]:
         }
     }
 
-    sheety_response = req.post(url=sheety_endpoint_complete, json=sheet_name_post)
+    sheety_response = req.post(url=sheety_endpoint_complete, json=sheet_name_post, headers=bearer_headers)
     print(f"POST: {sheety_response.json()['workout']}")
-
