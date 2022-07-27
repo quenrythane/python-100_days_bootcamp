@@ -20,6 +20,7 @@ class DataManager:
         self.destination_data = response.json()["prices"]
         return self.destination_data
 
+
     # POST
     """
     parameters = {
@@ -30,8 +31,18 @@ class DataManager:
         }
     }
     """
-    """
-    print(response)
-    print(response.json()["prices"][0]["lowestPrice"])
-    print(type(response.json()["prices"][0]["lowestPrice"]))
-    """
+
+    def update_destination_codes(self):
+        # PUT aka update
+        for city in self.destination_data:
+            new_data = {
+                "price": {
+                    "iataCode": city["iataCode"]
+                }
+            }
+            response = req.put(
+                url=f"{sheety_endpoint_complete}/{city['id']}",
+                json=new_data,
+                headers=header
+            )
+            print(response.text)
