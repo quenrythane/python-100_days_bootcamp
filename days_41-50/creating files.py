@@ -3,7 +3,7 @@ import os
 """
 # creating directory
 current_file_path = os.path.dirname(os.path.abspath(__file__))
-directory_name = f"day 42 - "
+directory_name = f"day 42 -HTML Basics "
 # os.mkdir(directory_name)
 
 # moving file to new directory
