@@ -12,7 +12,10 @@ print(soup)
 site_data = str(soup.find(id="__NEXT_DATA__").contents[0])
 start_indexes = [occurrence.start() + 13 for occurrence in re.finditer('"titleText":"', site_data)]
 
-for start_index in start_indexes[::-1][1:-1]:
+with open('movies.txt', 'w') as file:
+    file.write("")
+
+for start_index in start_indexes[::-1][101:-1]:
     end_index = site_data.find('"', start_index)
     title = site_data[start_index:end_index]
 
