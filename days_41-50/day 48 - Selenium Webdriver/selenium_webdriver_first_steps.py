@@ -16,8 +16,17 @@ driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 driver.get(product_url)
 # price = driver.find_element(by=By.CLASS_NAME, value="a-offscreen").text
 # price2 = driver.find_element(by=By.CLASS_NAME, value="a-price").text
-price3 = driver.find_element(By.CLASS_NAME, "a-offscreen").get_attribute("innerHTML")
-print(price3)
+price3 = driver.find_element(by=By.CLASS_NAME, value="a-offscreen").get_attribute("innerHTML")
+# price3 = driver.find_elements(by=By.CLASS_NAME, value="a-offscreen").get_attribute("innerHTML")
+# by id, tag, css selector
+print(price3, "\n")
+
+# xpath
+xpath = r"""//*[@id="corePriceDisplay_desktop_feature_div"]/div[1]/span[2]/span[1]"""
+price4 = driver.find_element(by=By.XPATH, value=xpath)
+print(price4)
+# print(price4.text)  # why show empty line?
+print(price4.get_attribute("innerHTML"))  # works but not sure why
 
 
 # drive.close()  # close tab
