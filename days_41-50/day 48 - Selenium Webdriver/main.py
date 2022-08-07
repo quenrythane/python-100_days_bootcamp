@@ -1,5 +1,14 @@
-x = "9".replace(",", "")
-print(x)
+x = []
+y = len(x)
+print(y)
 
-with open("cookie_saves\\PirateMuffinBakery.txt", 'r') as f:
-    print(f.read())
+for i in range(y):
+    print(i)
+
+
+a = [1, 2, 3, 4, 5]
+var[1] = 10
+
+
+print(c)
+print(c)

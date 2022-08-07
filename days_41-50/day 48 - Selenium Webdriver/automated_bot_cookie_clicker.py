@@ -1,7 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.keys import Keys
+# from selenium.webdriver.common.keys import Keys
 from webdriver_manager.chrome import ChromeDriverManager
 from time import sleep
 import os
@@ -13,6 +13,7 @@ class Bot:
         self.root_path = r"C:\Users\Thane Art\Desktop\Projekty\Nauka Pythona\100_days_bootcamp"
         self.save_path = fr"{self.root_path}\days_41-50\day 48 - Selenium Webdriver\cookie_saves\PirateMuffinBakery.txt"
         self.cookie_button = None
+        self.products_list = []
         # chrome_driver_path = 'C:\\Users\\Thane Art\\dev\\Tools\\chromedriver.exe'
         # after update dont need this anymore
 
@@ -37,6 +38,7 @@ class Bot:
         load_save = self.driver.find_element(by=By.ID, value="FileLoadInput")
         load_save.send_keys(self.save_path)
         sleep(1)
+        # self.delete_old_save()
 
     def delete_old_save(self):
         if os.path.exists(self.save_path):
@@ -46,10 +48,6 @@ class Bot:
         save_game = self.driver.find_element(by=By.LINK_TEXT, value="Save to file")
         save_game.click()
         sleep(1)
-        # save_game.send_keys("PirateMuffinBakery")
-        # save_game.send_keys(Keys.ENTER)
-        # save_game.send_keys(Keys.ARROW_LEFT)
-        # save_game.send_keys(Keys.ENTER)
 
     def clicking_cookie(self, times):
         # self.cookie_button = self.driver.find_element(by=By.ID, value="bigCookie")
@@ -75,9 +73,34 @@ class Bot:
 
         return cookies_score
 
+    def find_product(self):
+        product = self.driver.find_element(by=By.ID, value="productName")
+        product_name = product.find_element(by=By.TAG_NAME, value="b").text
+
+        pass
+
+
 
 cookie_bot = Bot()
-cookie_bot.clicking_cookie(20)
+cookie_bot.clicking_cookie(100)
+
+
+class Products:
+    def __int__(self):
+        self.products_dict = {}
+
+    def add_product(self, product_name, product_price):
+        pass
+
+
+class Product:
+    def __int__(self):
+        self.driver = cookie_bot.driver
+        self.name = self.driver.find_elements(by=By.CSS_SELECTOR, value="div.enabled div.productName")[-1].text
+
+
+product = Product()
+print(product.name)
 
 
 
