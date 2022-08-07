@@ -1,14 +1,6 @@
-x = []
-y = len(x)
-print(y)
+my_dict = {}
 
-for i in range(y):
-    print(i)
+my_dict["key0"] = {
+    "name":
+}
 
-
-a = [1, 2, 3, 4, 5]
-var[1] = 10
-
-
-print(c)
-print(c)
