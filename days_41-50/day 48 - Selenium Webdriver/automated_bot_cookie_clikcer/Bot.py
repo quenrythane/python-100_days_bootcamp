@@ -10,15 +10,10 @@ from Driver import driver
 
 class Bot:
     def __init__(self):
-        # self.url = "https://orteil.dashnet.org/cookieclicker/"
-        # self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-        # root_path = r"C:\Users\Thane Art\Desktop\Projekty\Nauka Pythona\100_days_bootcamp\days_41-50\day 48 - Selenium Webdriver"
-        # self.save_path = fr"{root_path}\automated_bot_cookie_clikcer\cookie_saves\PirateMuffinBakery.txt"
         root_path = r"C:\Users\Thane Art\Desktop\Projekty\Nauka Pythona\100_days_bootcamp\days_41-50\day 48 - Selenium Webdriver"
         self.save_path = fr"{root_path}\automated_bot_cookie_clikcer\cookie_saves\PirateMuffinBakery.txt"
         self.cookie_button = None
-        # chrome_driver_path = 'C:\\Users\\Thane Art\\dev\\Tools\\chromedriver.exe'
-        # after update dont need this anymore
+        self.products_dict = {}
 
         self.choose_language()
         self.load_save()
