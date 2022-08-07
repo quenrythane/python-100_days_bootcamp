@@ -36,7 +36,7 @@ class Bot:
         sleep(1)
         load_save = driver.driver.find_element(by=By.ID, value="FileLoadInput")
         load_save.send_keys(self.save_path)
-        sleep(1)
+        sleep(2)
         # self.delete_old_save()
 
     def delete_old_save(self):
