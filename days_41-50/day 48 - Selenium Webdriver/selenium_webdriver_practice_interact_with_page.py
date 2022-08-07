@@ -14,6 +14,15 @@ title = book_data[1].get_attribute("innerHTML").strip()
 author = book_data[2].find_element(by=By.CSS_SELECTOR, value="a").get_attribute("innerHTML").strip().replace("&nbsp;", " ")
 date = book_data[7].get_attribute("innerHTML").strip()
 
+# CLICK
 # find link by link text and click that link
 author_click = driver.find_element(by=By.LINK_TEXT, value=author)
 author_click.click()
+
+# SEARCH INPUT
+book_name_input = "Alchemia duchowego rozwoju. Inteligencja duchowa dla zaawansowanych"
+search_for_book = driver.find_element(by=By.CSS_SELECTOR, value="input.css-1rwl265-input-1")
+print(search_for_book)
+search_for_book.send_keys(book_name_input)
+
+
