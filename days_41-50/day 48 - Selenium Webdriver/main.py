@@ -1,2 +1,2 @@
-x = "aba".replace("a", "b")
+x = "9".replace(",", "")
 print(x)
