@@ -10,7 +10,7 @@ def our_decorator(function):
         function(x)
 
         # or do somethni after run function
-        print("after")
+        print("after \n")
 
     return function_wrapper
 
@@ -21,7 +21,7 @@ def our_decorator(function):
 def foo(x):
     print("Hi, foo has been called with " + str(x))
 
-foo("Hi")
+foo("Hi1")
 print("\n")
 foo("Hi")
 
@@ -30,13 +30,17 @@ foo("Hi")
 def foo2(x):
     print("Hi, foo has been called with " + str(x))
 
-foo2("Hi")
+foo2("Hi2")
 
 try:
-    @our_decorator
+    # @our_decorator
     foo2("Hi")
-except Exception as e:
-    print(e)
+except:
     print("we use decorator only when define functions, not when we call")
 
-
+our_decorator(foo2)("Hi3")
+""" this is the same as 
+@our_decorator
+def foo2(): 
+foo2("Hi3")
+"""
