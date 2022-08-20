@@ -26,12 +26,12 @@ def is_woman(function):
             function(name)
     return wrapped2
 
+
 @is_woman
 def tak(name):
     print("Hi", name)
 
-tak("arta")
-tak("art")
 
-
-
+if __name__ == "main":
+    tak("arta")
+    tak("art")
