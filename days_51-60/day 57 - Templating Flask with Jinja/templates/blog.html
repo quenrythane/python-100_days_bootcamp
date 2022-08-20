@@ -2,11 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Guess</title>
+    <title>Blog</title>
 </head>
 <body>
-    <h1>Hello {{ name.capitalize() }},</h1>
-    <h2>I guess you are a {{gender}}</h2>
+    {% for post in posts: %}
+        {% if post.id % 2 != 0: %}
+            <h1>{{ post.title }}</h1>
+            <p>{{ post.subtitle }}</p>
+        {% else: %}
+            <h1><em>parzysty:</em> {{ post.title }}</h1>
+            <p><em>parzysty:</em> {{ post.subtitle }}</p>
+        {% endif %}
+    {% endfor %}
 </body>
 
 <footer>

@@ -2,13 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Blog</title>
+    <title>Guess</title>
 </head>
 <body>
-    {% for post in posts %}
-        <h1>{{ post.title }}</h1>
-        <p>{{ post.text }}</p>
-    {% endfor %}
+    <h1>Hello {{ name.capitalize() }},</h1>
+    <h2>I guess you are a {{gender}}</h2>
 </body>
 
 <footer>
