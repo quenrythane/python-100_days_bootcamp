@@ -13,6 +13,12 @@ def home():
                            posts=blog_response)
 
 
+@app.route('/login', methods=["POST"])
+def receive_data():
+    return render_template("index.html")
+
+
+
 @app.route('/about')
 def about():
     return render_template("about.html")
