@@ -12,6 +12,17 @@ def home():
     return render_template("index.html",
                            posts=blog_response)
 
+
+@app.route('/about')
+def about():
+    return render_template("about.html")
+
+
+@app.route('/contact')
+def contact():
+    return render_template("contact.html")
+
+
 @app.route('/post/<int:index>')
 def post(index):
     post_data = blog_response[index-1]
