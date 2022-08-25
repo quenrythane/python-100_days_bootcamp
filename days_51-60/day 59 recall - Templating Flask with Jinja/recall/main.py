@@ -23,6 +23,15 @@ def contact():
     return render_template("contact.html")
 
 
+@app.route('/post2/<int:index>')
+def post2(index):
+    post_data = blog_response[index-1]
+    return render_template("post2.html",
+                           title=post_data["title"],
+                           body=post_data["body"],
+                           subtitle=post_data["subtitle"])
+
+
 @app.route('/post/<int:index>')
 def post(index):
     post_data = blog_response[index-1]
