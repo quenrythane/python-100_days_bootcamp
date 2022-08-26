@@ -6,7 +6,10 @@
 </head>
 <body>
     <h1>Works</h1>
-    <form action="/login" method="post">
+<!--    <form action="/login" method="post">-->
+    <!-- Bellow is dynamically generated path - helpful in case the url change from /login to /something/login etc -->
+    <!-- receive_data is function in main file flask app - which direct to correct url   -->
+    <form action="{{ url_for('receive_data') }}" method="post">
         <label>Name</label>
         <input type="text" placeholder="name" name="username">
         <label>Password</label>
