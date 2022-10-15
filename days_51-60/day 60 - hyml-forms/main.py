@@ -23,4 +23,4 @@ def receive_data():
 
 # App starts here
 if __name__ == "__main__":
-    app.run(debug=True, port=59)
+    app.run(debug=True, port=60)
