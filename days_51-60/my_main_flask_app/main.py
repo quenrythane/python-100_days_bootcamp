@@ -7,11 +7,21 @@ blog_response = req.get(url).json()
 
 app = Flask(__name__)
 
+
 @app.route('/blog')
 @app.route('/')
 def home():
     return render_template("index.html",
                            posts=blog_response)
+
+
+@app.route('/post/<int:index>')
+def post(index):
+    post_data = blog_response[index-1]
+    return render_template("post.html",
+                           title=post_data["title"],
+                           body=post_data["body"],
+                           subtitle=post_data["subtitle"])
 
 
 @app.route('/about')
@@ -24,13 +34,14 @@ def contact():
     return render_template("contact.html")
 
 
-@app.route('/post/<int:index>')
-def post(index):
-    post_data = blog_response[index-1]
-    return render_template("post.html",
-                           title=post_data["title"],
-                           body=post_data["body"],
-                           subtitle=post_data["subtitle"])
+@app.route('/from-entry', methods=["POST"])
+def contact():
+    return render_template("contact.html")
+    name = request.form["username"]
+    password = request.form["password"]
+    print(request.form)
+
+    return f"<h1>Name: {name}, Password: {password}xd</h1>"
 
 
 # Flask app start here
