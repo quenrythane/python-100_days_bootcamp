@@ -10,11 +10,22 @@
     <!-- Bellow is dynamically generated path - helpful in case the url change from /login to /something/login etc -->
     <!-- receive_data is function in main file flask app - which direct to correct url   -->
     <form action="{{ url_for('receive_data') }}" method="post">
+    <!-- action= <- tell where the data will land and method= <- tell with what method -->
+
         <label>Name</label>
         <input type="text" placeholder="name" name="username">
+    <!-- <input type="text" id="fname" name="fname" value="John">
+    value= <- could have value filled
+    placeholder= <- give ghost-gray text inside place to fill (could use as a hint) -->
+
         <label>Password</label>
-        <input type="text" placeholder="password" name="password">
-        <button type="submit">Ok</button>
+        <input type="password" placeholder="password" name="password" value="zaq1@WSX">
+    <!-- name="my_data" <- show how sent data will be named
+       e.g. if I write Artur, zaq1@WSX sent data will looks like: username=Artur&password=zaq1@WSX -->
+
+        <button type="submit">Submit</button>
+    <!-- by click the "Submit" button, the form-data will be sent to a page called
+        in action=" " -> so sending to flask receive_data function   -->
     </form>
 </body>
 </html>

@@ -16,9 +16,11 @@ def home():
 def receive_data():
     name = request.form["username"]
     password = request.form["password"]
-    return f"<h1>Name: {name}, Password: {password}</h1>"
+    print(request.form)
+
+    return f"<h1>Name: {name}, Password: {password}xd</h1>"
 
 
-
+# App starts here
 if __name__ == "__main__":
-    app.run(debug=True, port=60)
+    app.run(debug=True, port=59)
