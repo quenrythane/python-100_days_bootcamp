@@ -33,7 +33,7 @@ def about():
 def contact():
     return render_template("contact.html")
 
-
+"""
 @app.route('/from-entry', methods=["POST"])
 def contact():
     return render_template("contact.html")
@@ -42,6 +42,7 @@ def contact():
     print(request.form)
 
     return f"<h1>Name: {name}, Password: {password}xd</h1>"
+"""
 
 
 # Flask app start here
