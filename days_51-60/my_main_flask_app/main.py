@@ -31,10 +31,13 @@ def about():
 
 @app.route('/contact', methods=["GET", "POST"])
 def contact():
+    return render_template("contact.html", request_method=request.method)
+    """
     if request.method == "GET":
-        return render_template("contact.html")
+        return render_template("contact.html", request_method=request.method)
     elif request.method == "POST":
         return f"<h1>Successfully sent your message</h1>"
+    """
 
 
 """
