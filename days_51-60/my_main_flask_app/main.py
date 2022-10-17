@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import requests as req
 
 
@@ -33,16 +33,16 @@ def about():
 def contact():
     return render_template("contact.html")
 
-"""
+
 @app.route('/from-entry', methods=["POST"])
-def contact():
-    return render_template("contact.html")
-    name = request.form["username"]
-    password = request.form["password"]
+def receive_data():
+    name = request.form["name"]
+    email = request.form["email"]
+    phone = request.form["phone"]
+    message = request.form["message"]
     print(request.form)
 
-    return f"<h1>Name: {name}, Password: {password}xd</h1>"
-"""
+    return f"<h1>Successfully sent your message</h1>"
 
 
 # Flask app start here
