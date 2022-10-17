@@ -12,13 +12,16 @@ def home():
     return render_template("index.html")
 
 
-@app.route("/something/login", methods=["POST"])
+@app.route("/something/login", methods=["GET", "POST"])
 def receive_data():
-    name = request.form["username"]
-    password = request.form["password"]
-    print(request.form)
+    if request.method == "POST":
+        name = request.form["username"]
+        password = request.form["password"]
+        print(request.form)
+        return f"<h1>Name: {name}, Password: {password}xd</h1>"
+    elif request.method == "GET":
+        return render_template("index.html")
 
-    return f"<h1>Name: {name}, Password: {password}xd</h1>"
 
 
 # App starts here
