@@ -31,26 +31,16 @@ def about():
 
 @app.route('/contact', methods=["GET", "POST"])
 def contact():
-    return render_template("contact.html", request_method=request.method)
-    """
-    if request.method == "GET":
-        return render_template("contact.html", request_method=request.method)
-    elif request.method == "POST":
-        return f"<h1>Successfully sent your message</h1>"
-    """
+    if request.method == "POST":
+        name = request.form["name"]
+        email = request.form["email"]
+        phone = request.form["phone"]
+        message = request.form["message"]
+        print(request.form)
+        return render_template("contact.html", msg_sent=True)
+    return render_template("contact.html", msg_sent=False)
 
 
-"""
-@app.route('/from-entry', methods=["POST"])
-def receive_data():
-    name = request.form["name"]
-    email = request.form["email"]
-    phone = request.form["phone"]
-    message = request.form["message"]
-    print(request.form)
-
-    return f"<h1>Successfully sent your message</h1>"
-"""
 
 # Flask app start here
 if __name__ == "__main__":
