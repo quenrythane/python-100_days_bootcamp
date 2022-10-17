@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import requests as req
+from mail.mail_sender import send_message
 
 
 url = "https://api.npoint.io/c790b4d5cab58020d391"  # [{id, body, title, subtitle}, ...]
@@ -37,6 +38,7 @@ def contact():
         phone = request.form["phone"]
         message = request.form["message"]
         print(request.form)
+        send_message(email, message)
         return render_template("contact.html", msg_sent=True)
     return render_template("contact.html", msg_sent=False)
 
