@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from wtforms import Form, BooleanField, StringField, validators
+from wtforms import Form, PasswordField, StringField, validators
 
 app = Flask(__name__)
 
@@ -12,7 +12,7 @@ def home():
 # wtforms
 class RegistrationForm(Form):
     email = StringField('Email:', [validators.Length(min=6, max=35)])
-    password = StringField('Password:', [validators.Length(min=4, max=25)])
+    password = PasswordField('Password:', [validators.Length(min=4, max=25)])
 
 
 @app.route("/login")
