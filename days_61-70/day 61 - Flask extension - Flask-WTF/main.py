@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 from wtforms import Form, PasswordField, StringField, validators, SubmitField
-from flask_wtf import FlaskForm
+from flask_wtf import FlaskForm  # flask_wtf is something like add on to wtforms
 from flask_bootstrap import Bootstrap
 
 

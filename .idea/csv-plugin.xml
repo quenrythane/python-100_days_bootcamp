@@ -66,6 +66,27 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\days_61-70\day 62 - WTForms test\cafe-data.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\days_61-70\day 62 - WTForms test\sol\cafe-data.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\days_61-70\day 62 - WTForms test\starting files\cafe-data.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>
