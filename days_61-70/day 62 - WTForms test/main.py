@@ -1,8 +1,8 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
-from wtforms.validators import DataRequired
+from wtforms import StringField, SubmitField, SelectField
+from wtforms.validators import DataRequired, URL
 import csv
 
 app = Flask(__name__)
@@ -42,11 +42,12 @@ def add_cafe():
 
 @app.route('/cafes')
 def cafes():
-    with open('cafe-data.csv', newline='') as csv_file:
+    with open('cafe-data.csv', newline='', encoding="utf8") as csv_file:
         csv_data = csv.reader(csv_file, delimiter=',')
         list_of_rows = []
         for row in csv_data:
             list_of_rows.append(row)
+    print(list_of_rows)
     return render_template('cafes.html', cafes=list_of_rows)
 
 
