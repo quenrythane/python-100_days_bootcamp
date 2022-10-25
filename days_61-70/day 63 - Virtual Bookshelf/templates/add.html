@@ -5,9 +5,10 @@
     <title>Add Book</title>
 </head>
 <body>
-
+    <a href="{{ url_for('home') }}">My Library</a>
 
     <form action="{{ url_for('add') }}"  method="POST">
+        {{ form.csrf_token }}
         {{ form.title.label }} {{ form.title }}
         {{ form.author.label }} {{ form.author }}
         {{ form.rating.label }} {{ form.rating }}

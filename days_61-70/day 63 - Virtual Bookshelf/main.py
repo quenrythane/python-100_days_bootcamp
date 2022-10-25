@@ -27,18 +27,15 @@ def home():
 def add():
     form = BookForm()
     message = False
-    if request.method == "POST":
+    if form.validate_on_submit():
         message = True
         all_books.append({
             "title": form.title.data,
             "author": form.author.data,
             "rating": form.rating.data
         })
-        print(all_books[-2:])
-
-        book_name = form["title"].data
-        return render_template("add.html", form=form, message=message, book_name=book_name)
-    print(form.validate_on_submit(), form.data)
+        print(all_books[-1])
+        return render_template("add.html", form=form, message=message, book_name=all_books[-1]["title"])
     return render_template("add.html", form=form, message=message)
 
 
