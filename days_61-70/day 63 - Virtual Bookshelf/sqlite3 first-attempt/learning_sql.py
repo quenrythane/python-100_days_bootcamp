@@ -9,11 +9,14 @@ cursor = db.cursor()
 
 # single Excel file can contain many tables (sheets- this rectangle at the bottom), each tab is a different table.
 # Similarly, our database can contain many tables.
-cursor.execute("CREATE TABLE books ("
-               "id INTEGER PRIMARY KEY, "
-               "title varchar(250) NOT NULL UNIQUE, "
-               "author varchar(250) NOT NULL, "
-               "rating FLOAT NOT NULL)")
+try:  # there is try because we need to add just one time this table
+    cursor.execute("CREATE TABLE books ("
+                   "id INTEGER PRIMARY KEY, "
+                   "title varchar(250) NOT NULL UNIQUE, "
+                   "author varchar(250) NOT NULL, "
+                   "rating FLOAT NOT NULL)")
+except:
+    print("this is fine :)")
 # .execute() <- This method will tell the cursor to execute an action.
 # CREATE TABLE books <- SQL command of creating new table named "books"
 # what is in the parenthesis tell about "columns" and they type:
@@ -21,3 +24,10 @@ cursor.execute("CREATE TABLE books ("
     # title varchar(250) NOT NULL UNIQUE <-
         # title is name, varchar(250) means string type of max length 250,
         # NOT NULL means that cant be empty, and UNIQUE means that there cannot be 2 or more same records
+
+# this 2 below add records to database
+cursor.execute("INSERT INTO books VALUES(3, 'Harry Potter 3', 'J. K. Rowling', '9.3')")  # this some kind insert data
+db.commit()  # this works like hit enter - to accept the record to insert to database
+
+
+
