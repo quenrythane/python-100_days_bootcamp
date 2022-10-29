@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 # Create an SQLite database called new-books-collection.db
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///new-books-collection.db"
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
