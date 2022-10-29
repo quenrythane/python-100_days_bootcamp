@@ -14,7 +14,7 @@ db = SQLAlchemy(app)
 # Create a table in this database called books.
 class Book(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(250), unique=False, nullable=False)  # nullable=False means can't be empty field
+    title = db.Column(db.String(250), unique=True, nullable=False)  # nullable=False means can't be empty field
     author = db.Column(db.String(250), nullable=False)
     rating = db.Column(db.Float, nullable=False)
 
@@ -31,13 +31,11 @@ with app.app_context():
 
 db.create_all()
 # CREATE a new entry in the books table
-new_book = Book(id=2, title="Harry Potter", author="J. K. Rowling", rating=9.3)  # it's HAVE TO be **kwargs (the documentation says it)
+new_book = Book(id=3, title="Harry Potter3", author="J. K. Rowling", rating=9.3)  # it's HAVE TO be **kwargs (the documentation says it)
 # NOTE: When creating new records, the primary key fields is optional. you can also write without this **kwargs:
 # adding record to database
 db.session.add(new_book)
-
-
-db.session.commit()
+db.session.commit()  # this line throws an error
 
 """
     # CREATE a new entry in the books table
