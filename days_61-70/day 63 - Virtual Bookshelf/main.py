@@ -1,4 +1,4 @@
-from flask import Flask, render_template  # , request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for
 from wtforms import StringField, SubmitField, SelectField
 from wtforms.validators import DataRequired
 from flask_wtf import FlaskForm
@@ -37,6 +37,8 @@ class BookForm(FlaskForm):
     author = StringField("Book Author", validators=[DataRequired()])
     rating = SelectField("Rating", choices=["⭐", "⭐⭐", "⭐⭐⭐", "⭐⭐⭐⭐", "⭐⭐⭐⭐⭐"], validators=[DataRequired()])
     submit = SubmitField('Add Book')
+    submit2 = SubmitField('Edit Rating')
+
 
 
 @app.route('/')
@@ -63,6 +65,34 @@ def add():
         all_books = MyLibraryBooks.query.all()
         return render_template("index.html", all_books=all_books)
     return render_template("add.html", form=form, message=message)
+
+
+@app.route("/edit", methods=["GET", "POST"])
+def edit():
+    form = BookForm()
+    if request.method == "POST":
+        #UPDATE RECORD
+        book_id = request.form["id"]  # bo in edit_rating.html <input hidden="hidden" name="id" value="{{book.id}}">
+        print(book_id, 'xd')
+        book_to_update = MyLibraryBooks.query.get(book_id)
+        book_to_update.rating = form.rating.data
+        db.session.commit()
+        return redirect(url_for('home'))
+    book_id = request.args.get('book_id')
+    print(book_id, 'xdd')  # bo in index.html <a href="{{ url_for('edit', book_id=book.id) }}">Edit Rating</a>
+    book_selected = MyLibraryBooks.query.get(book_id)
+    return render_template("edit_rating.html", form=form, book=book_selected)
+
+
+@app.route("/delete")
+def delete():
+    book_id = request.args.get('id')
+
+    # DELETE A RECORD BY ID
+    book_to_delete = MyLibraryBooks.query.get(book_id)
+    db.session.delete(book_to_delete)
+    db.session.commit()
+    return redirect(url_for('home'))
 
 
 if __name__ == "__main__":
