@@ -60,7 +60,8 @@ def add():
         db.session.add(new_book)
         db.session.commit()  # this line throws an error
 
-        return render_template("add.html", form=form, message=message, book_name=form.title.data)
+        all_books = MyLibraryBooks.query.all()
+        return render_template("index.html", all_books=all_books)
     return render_template("add.html", form=form, message=message)
 
 
