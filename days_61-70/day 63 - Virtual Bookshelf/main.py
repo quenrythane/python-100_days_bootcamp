@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template  # , request, redirect, url_for
 from wtforms import StringField, SubmitField, SelectField
 from wtforms.validators import DataRequired
 from flask_wtf import FlaskForm
@@ -39,12 +39,10 @@ class BookForm(FlaskForm):
     submit = SubmitField('Add Book')
 
 
-# all_books = db.session.query(MyLibraryBooks).all()
-all_books = MyLibraryBooks.query.all()
-
-
 @app.route('/')
 def home():
+    all_books = MyLibraryBooks.query.all()
+    print(all_books)
     return render_template("index.html", all_books=all_books)
 
 
@@ -54,16 +52,17 @@ def add():
     message = False
     if form.validate_on_submit():
         message = True
-        all_books.append({
-            "title": form.title.data,
-            "author": form.author.data,
-            "rating": form.rating.data
-        })
-        print(all_books[-1])
-        return render_template("add.html", form=form, message=message, book_name=all_books[-1]["title"])
+        # prepare new entry
+        new_book = MyLibraryBooks(title=form.title.data,
+                                  author=form.author.data,
+                                  rating=form.rating.data)
+        # add and commit new entry
+        db.session.add(new_book)
+        db.session.commit()  # this line throws an error
+
+        return render_template("add.html", form=form, message=message, book_name=form.title.data)
     return render_template("add.html", form=form, message=message)
 
 
 if __name__ == "__main__":
     app.run(debug=True, port=63)
-
