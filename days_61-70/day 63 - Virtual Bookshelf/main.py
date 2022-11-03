@@ -51,20 +51,19 @@ def home():
 @app.route("/add", methods=["GET", "POST"])
 def add():
     form = BookForm()
-    message = False
     if form.validate_on_submit():
-        message = True
         # prepare new entry
-        new_book = MyLibraryBooks(title=form.title.data,
-                                  author=form.author.data,
-                                  rating=form.rating.data)
+        new_book = MyLibraryBooks(  # id is autogenerate and auto increase
+                                title=form.title.data,
+                                author=form.author.data,
+                                rating=form.rating.data)
         # add and commit new entry
         db.session.add(new_book)
         db.session.commit()  # this line throws an error
 
         all_books = MyLibraryBooks.query.all()
         return render_template("index.html", all_books=all_books)
-    return render_template("add.html", form=form, message=message)
+    return render_template("add.html", form=form)
 
 
 @app.route("/edit", methods=["GET", "POST"])
@@ -82,6 +81,24 @@ def edit():
     print(book_id, 'xdd')  # bo in index.html <a href="{{ url_for('edit', book_id=book.id) }}">Edit Rating</a>
     book_selected = MyLibraryBooks.query.get(book_id)
     return render_template("edit_rating.html", form=form, book=book_selected)
+
+"""
+@app.route('/user/<username>')
+def show_user_profile(username):
+    # show the user profile for that user
+    return 'User %s' % escape(username)
+
+@app.route('/post/<int:post_id>')
+def show_post(post_id):
+    # show the post with the given id, the id is an integer
+    return 'Post %d' % post_id
+
+@app.route('/path/<path:subpath>')
+def show_subpath(subpath):
+    # show the subpath after /path/
+    return 'Subpath %s' % escape(subpath)
+"""
+
 
 
 @app.route("/delete")
