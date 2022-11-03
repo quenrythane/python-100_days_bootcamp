@@ -82,6 +82,16 @@ def edit():
     book_selected = MyLibraryBooks.query.get(book_id)
     return render_template("edit_rating.html", form=form, book=book_selected)
 
+
+@app.route("/adit/<book_idid>", methods=["GET", "POST"])
+def adit(book_idid):
+    all_books = MyLibraryBooks.query.all()
+    book_to_update = MyLibraryBooks.query.get(book_idid)
+    xd = f"{book_idid}: {book_to_update.title}"
+    print(book_idid, type(book_idid))
+    return xd
+
+
 """
 @app.route('/user/<username>')
 def show_user_profile(username):

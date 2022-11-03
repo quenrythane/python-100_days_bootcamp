@@ -7,6 +7,7 @@
 <body>
     <h1>My Library</h1>
     <a href="{{ url_for('add') }}">Add New Book</a>
+
     {% if all_books %}
         <ul>
             {% for book in all_books: %}
@@ -14,6 +15,7 @@
                 <a href="{{ url_for('delete', id=book.id) }}">Delete</a>
                 {{book.title}} - {{book.author}} = {{book.rating}}
                 <a href="{{ url_for('edit', book_id=book.id) }}">Edit Rating</a>
+                <a href="{{ url_for('adit', book_idid=book.id) }}">adit</a>
             </li>
             {% endfor %}
         </ul>
