@@ -5,14 +5,32 @@
     <title>Edit Rating</title>
 </head>
 <body>
-     <form action="{{ url_for('edit') }}" method="POST">
-        <p>Book Name: {{book.title}}</p>
-        <p>Current Rating {{book.rating}}</p>
-         <input hidden="hidden" name="id" value="{{book.id}}">
-<!--        <input name="rating" type="text" placeholder="New Rating">-->
-<!--        <button type="submit">Change Rating</button>-->
-        {{ form.rating.label }} {{ form.rating }}
-        {{ form.submit2}}
-    </form>
+    {% if xd=="new" %}
+        <form action="{{ url_for('adit', book_idid=book.id) }}" method="POST">
+            <p>
+                Book Name: {{book.title}}<br>
+                Current Rating: {{book.rating}}
+            </p>
+            <!--         <input hidden="hidden" name="id" value="{{book.id}}">-->
+            <!--        <input name="rating" type="text" placeholder="New Rating">-->
+            <!--        <button type="submit">Change Rating</button>-->
+            {{ form.csrf_token }}
+            {{ form.rating.label }} {{ form.rating }}
+            {{ form.submit2}}
+        </form>
+
+    {% else %}
+        <form action="{{ url_for('edit') }}" method="POST">
+            <p>Book Name: {{book.title}}</p>
+            <p>Current Rating {{book.rating}}</p>
+            <input hidden="hidden" name="id" value="{{book.id}}">
+            <!--        <input name="rating" type="text" placeholder="New Rating">-->
+            <!--        <button type="submit">Change Rating</button>-->
+            {{ form.csrf_token }}
+            {{ form.rating.label }} {{ form.rating }}
+            {{ form.submit2}}
+        </form>
+    {% endif %}
+
 </body>
 </html>

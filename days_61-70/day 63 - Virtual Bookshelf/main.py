@@ -40,11 +40,9 @@ class BookForm(FlaskForm):
     submit2 = SubmitField('Edit Rating')
 
 
-
 @app.route('/')
 def home():
     all_books = MyLibraryBooks.query.all()
-    print(all_books)
     return render_template("index.html", all_books=all_books)
 
 
@@ -58,11 +56,10 @@ def add():
                                 author=form.author.data,
                                 rating=form.rating.data)
         # add and commit new entry
-        db.session.add(new_book)
-        db.session.commit()  # this line throws an error
+        db.session.add(new_book)  # add entry
+        db.session.commit()  # commit entry ("update" database)
 
-        all_books = MyLibraryBooks.query.all()
-        return render_template("index.html", all_books=all_books)
+        return redirect(url_for('home'))
     return render_template("add.html", form=form)
 
 
@@ -70,7 +67,7 @@ def add():
 def edit():
     form = BookForm()
     if request.method == "POST":
-        #UPDATE RECORD
+        # UPDATE RECORD
         book_id = request.form["id"]  # bo in edit_rating.html <input hidden="hidden" name="id" value="{{book.id}}">
         print(book_id, 'xd')
         book_to_update = MyLibraryBooks.query.get(book_id)
@@ -80,41 +77,27 @@ def edit():
     book_id = request.args.get('book_id')
     print(book_id, 'xdd')  # bo in index.html <a href="{{ url_for('edit', book_id=book.id) }}">Edit Rating</a>
     book_selected = MyLibraryBooks.query.get(book_id)
-    return render_template("edit_rating.html", form=form, book=book_selected)
+    return render_template("edit_rating.html", form=form, book=book_selected, xd="")
 
 
-@app.route("/adit/<book_idid>", methods=["GET", "POST"])
+@app.route("/adit/<int:book_idid>", methods=["GET", "POST"])
 def adit(book_idid):
-    all_books = MyLibraryBooks.query.all()
-    book_to_update = MyLibraryBooks.query.get(book_idid)
-    xd = f"{book_idid}: {book_to_update.title}"
-    print(book_idid, type(book_idid))
-    return xd
+    form = BookForm()
+    selected_book = MyLibraryBooks.query.get(book_idid)
+    if request.method == "POST":  # form.validate_on_submit() <- this didn't work
+        # because not all of the fields were sent filled (I asked only for 1 field -> rest were empty)
+
+        book_to_update = MyLibraryBooks.query.get(book_idid)
+        new_rating = form.rating.data
+        book_to_update.rating = new_rating
+        db.session.commit()
+
+        return redirect(url_for('home'))
+    return render_template("edit_rating.html", form=form, book=selected_book, xd="new")
 
 
-"""
-@app.route('/user/<username>')
-def show_user_profile(username):
-    # show the user profile for that user
-    return 'User %s' % escape(username)
-
-@app.route('/post/<int:post_id>')
-def show_post(post_id):
-    # show the post with the given id, the id is an integer
-    return 'Post %d' % post_id
-
-@app.route('/path/<path:subpath>')
-def show_subpath(subpath):
-    # show the subpath after /path/
-    return 'Subpath %s' % escape(subpath)
-"""
-
-
-
-@app.route("/delete")
-def delete():
-    book_id = request.args.get('id')
-
+@app.route("/delete/<int:book_id>")
+def delete(book_id):
     # DELETE A RECORD BY ID
     book_to_delete = MyLibraryBooks.query.get(book_id)
     db.session.delete(book_to_delete)
